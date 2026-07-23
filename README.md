@@ -77,3 +77,23 @@ http://127.0.0.1:8000/
 ## Author
 
 **Bhargavi Areti**
+
+## Output Screenshots
+
+### Index Page
+![Index Page](screenshots/Index%20page.png)
+
+### Registration Page
+![Registration Page](screenshots/Registration%20page.png)
+
+### Login Page
+![Login Page](screenshots/Login%20page.png)
+
+### Home Page
+![Home Page](screenshots/Home%20page.png)
+
+### View Dataset Page
+![View Dataset Page](screenshots/View%20Dataset%20page.png)
+
+### Prediction Page
+![Prediction Page](screenshots/Prediction%20page.png)
