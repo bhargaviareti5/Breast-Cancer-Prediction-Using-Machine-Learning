@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Wearable Sensing Technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafc;
+            overflow-x: hidden;
+            padding-top: 80px; /* For fixed navbar */
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(30, 60, 114, 0.1);
+            z-index: 1000;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 25px rgba(30, 60, 114, 0.15);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #1e3c72;
+        }
+        
+        .logo-text span {
+            color: #FFD700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #FFD700;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: #FFD700;
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            color: #1e3c72;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 30px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #1e3c72;
+        }
+        
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9)),
+                        url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .welcome-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .welcome-content p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .accent {
+            color: #FFD700;
+        }
+        
+        .welcome-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .welcome-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 5%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Dashboard Stats */
+        .dashboard-stats {
+            padding: 60px 0;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .stat-icon.blue {
+            background: linear-gradient(135deg, #eef1ff, #d6dcff);
+            color: #2a5298;
+        }
+        
+        .stat-icon.yellow {
+            background: linear-gradient(135deg, #fff8e1, #ffeeb5);
+            color: #FFA000;
+        }
+        
+        .stat-icon.green {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #2e7d32;
+        }
+        
+        .stat-icon.purple {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            color: #7b1fa2;
+        }
+        
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #1e3c72;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: #FFD700;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .action-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .action-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #eef1ff;
+        }
+        
+        .action-header h3 {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-header h3 i {
+            color: #FFD700;
+        }
+        
+        .action-content {
+            padding: 25px;
+        }
+        
+        .action-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .action-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+        
+        .action-btn.secondary {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+        }
+        
+        /* Recent Activity */
+        .recent-activity {
+            padding: 60px 0;
+        }
+        
+        .activity-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .activity-item {
+            padding: 20px 25px;
+            border-bottom: 1px solid #eef1ff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .activity-icon.blue {
+            background: #eef1ff;
+            color: #2a5298;
+        }
+        
+        .activity-icon.green {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .activity-icon.yellow {
+            background: #fff8e1;
+            color: #FFA000;
+        }
+        
+        .activity-content h4 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        
+        .activity-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .activity-time {
+            margin-left: auto;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        /* Breast Cancer & Diabetes Sections */
+        .disease-section {
+            padding: 80px 0;
+        }
+        
+        .disease-section.blue-bg {
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+        }
+        
+        .disease-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .disease-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .disease-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .disease-content h2 {
+            color: #1e3c72;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .disease-content p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .features-list {
+            list-style-type: none;
+            margin-top: 25px;
+        }
+        
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .features-list li i {
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #FFD700;
+        }
+        
+        .footer-section p, .footer-section li {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul {
+            list-style-type: none;
+        }
+        
+        .footer-section li {
+            padding: 5px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .disease-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 40px 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                align-items: flex-start;
+                padding-left: 40px;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .user-profile {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .welcome-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .disease-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-section {
+                padding: 60px 0 40px;
+            }
+            
+            .dashboard-stats, .quick-actions, .recent-activity, .disease-section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">Health<span>Tech</span></div>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'home' %}" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cancer' %}" class="nav-link">Breast Cancer</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'diabetes' %}" class="nav-link">Diabetes</a>
+                </li>
+                
+                <li class="nav-item">
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Welcome Section -->
+    <section id="home" class="welcome-section">
+        <div class="welcome-shapes">
+            <div class="welcome-shape shape-1"></div>
+            <div class="welcome-shape shape-2"></div>
+        </div>
+        
+        <div class="container">
+            <div class="welcome-content">
+                <h1>Welcome Back, <span class="accent">Researcher!</span></h1>
+                <p>Your dashboard provides personalized insights, research tools, and monitoring capabilities for AI-based wearable sensing technologies in breast cancer  management.</p>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Actions</h2>
+            </div>
+            
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-header">
+                        <h3><i class="fas fa-ribbon"></i> Breast Cancer Monitoring</h3>
+                    </div>
+                    <div class="action-content">
+                        <p>Access real-time thermal imaging data, biomarker analysis, and predictive models for breast cancer detection and monitoring.</p>
+                        <a href="{% url 'cancer' %}" class="action-btn">View Dashboard</a>
+                    </div>
+                </div>
+                
+                
+                
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recent Activity -->
+    <section class="recent-activity">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recent Activity</h2>
+            </div>
+            
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon blue">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Data Upload Completed</h4>
+                        <p>Thermal imaging data from Patient #2456 uploaded successfully</p>
+                    </div>
+                    <div class="activity-time">10 min ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Analysis Complete</h4>
+                        <p>AI analysis detected normal patterns in glucose monitoring data</p>
+                    </div>
+                    <div class="activity-time">1 hour ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon yellow">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Alert Generated</h4>
+                        <p>Potential anomaly detected in breast thermal imaging - Patient #1892</p>
+                    </div>
+                    <div class="activity-time">3 hours ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon blue">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Report Generated</h4>
+                        <p>Monthly diabetes management report for Q3 2023 created</p>
+                    </div>
+                    <div class="activity-time">5 hours ago</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Breast Cancer Section -->
+    <section id="breast-cancer" class="disease-section blue-bg">
+        <div class="container">
+            <div class="disease-container">
+                <div class="disease-image">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Breast Cancer Monitoring Technology">
+                </div>
+                <div class="disease-content">
+                    <h2>Breast Cancer Monitoring</h2>
+                    <p>Our AI-powered wearable sensing technologies provide continuous, non-invasive monitoring for breast cancer detection, treatment tracking, and recurrence prediction.</p>
+                    
+                    <ul class="features-list">
+                        <li>
+                            <i class="fas fa-thermometer"></i>
+                            <strong>Thermal Imaging Analysis</strong> - Continuous temperature monitoring with AI pattern recognition
+                        </li>
+                        <li>
+                            <i class="fas fa-vial"></i>
+                            <strong>Biomarker Detection</strong> - Wearable sensors for early biochemical marker identification
+                        </li>
+                        <li>
+                            <i class="fas fa-brain"></i>
+                            <strong>Predictive Analytics</strong> - Machine learning models for recurrence risk assessment
+                        </li>
+                        <li>
+                            <i class="fas fa-mobile-alt"></i>
+                            <strong>Real-time Alerts</strong> - Instant notifications for abnormal pattern detection
+                        </li>
+                    </ul>
+                    
+                    <a href="{% url 'cancer' %}" class="action-btn" style="margin-top: 20px;">Access Full Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  
+                    
+                   
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert('{{ message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Our Research</h4>
+                    <p>Pioneering AI-based wearable sensing technologies for diabetes and breast cancer management through interdisciplinary collaboration and innovative research.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" style="color: white; text-decoration: none;">Home</a></li>
+                        <li><a href="#breast-cancer" style="color: white; text-decoration: none;">Breast Cancer</a></li>
+                        <li><a href="#diabetes" style="color: white; text-decoration: none;">Diabetes</a></li>
+                        <li><a href="#" style="color: white; text-decoration: none;">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p><i class="fas fa-envelope"></i> research@healthtech.edu</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Healthcare Technology Research Institute</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Healthcare Technology Research Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                // Update active link
+                navLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', function() {
+            // Show confirmation dialog
+            if (confirm('Are you sure you want to log out?')) {
+                // Show loading state
+                logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging Out...';
+                logoutBtn.disabled = true;
+                
+                // Simulate logout process
+                setTimeout(function() {
+                    // Show success notification
+                    showNotification('Successfully logged out. Redirecting to login page...', 'success');
+                    
+                    // Redirect to login page after delay
+                    setTimeout(function() {
+                        window.location.href = "{% url 'login' %}";
+                    }, 1500);
+                }, 1000);
+            }
+        });
+
+        // Notification function
+        function showNotification(message, type) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button class="notification-close"><i class="fas fa-times"></i></button>
+            `;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? '#2ecc71' : type === 'error' ? '#e74c3c' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 9999;
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            // Add close button functionality
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', function() {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            });
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            // Add to document
+            document.body.appendChild(notification);
+            
+            // Add keyframe animations if not already present
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statCards = entry.target.querySelectorAll('.stat-card');
+                    statCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe the stats container
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) {
+            observer.observe(statsContainer);
+            
+            // Set initial state for animation
+            const statCards = statsContainer.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+        }
+
+        // Simulate live data updates
+        function updateLiveData() {
+            // Update activity times
+            const activityTimes = document.querySelectorAll('.activity-time');
+            activityTimes.forEach(time => {
+                const text = time.textContent;
+                if (text.includes('min ago')) {
+                    const mins = parseInt(text) + 1;
+                    time.textContent = `${mins} min ago`;
+                }
+            });
+            
+            // Randomly update stats (for demo purposes)
+            const statNumbers = document.querySelectorAll('.stat-card h3');
+            statNumbers.forEach(stat => {
+                const currentText = stat.textContent;
+                if (currentText.includes('%')) {
+                    const currentValue = parseFloat(currentText);
+                    const randomChange = (Math.random() - 0.5) * 0.1; // Small random change
+                    const newValue = Math.max(95, Math.min(100, currentValue + randomChange));
+                    stat.textContent = newValue.toFixed(1) + '%';
+                }
+            });
+        }
+
+        // Update data every 30 seconds
+        setInterval(updateLiveData, 30000);
+    </script>
+</body>
+</html>

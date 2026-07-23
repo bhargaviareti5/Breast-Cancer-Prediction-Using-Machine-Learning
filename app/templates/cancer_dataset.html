@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Dataset - AI Wearable Sensing Technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafc;
+            overflow-x: hidden;
+            padding-top: 80px; /* For fixed navbar */
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(30, 60, 114, 0.1);
+            z-index: 1000;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 25px rgba(30, 60, 114, 0.15);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #1e3c72;
+        }
+        
+        .logo-text span {
+            color: #FFD700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #FFD700;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: #FFD700;
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            color: #1e3c72;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 30px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #1e3c72;
+        }
+        
+        /* Dataset Hero Section */
+        .dataset-hero {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9));
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dataset-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dataset-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .dataset-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .accent {
+            color: #FFD700;
+        }
+        
+        .hero-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 5%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Dataset Overview */
+        .dataset-overview {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+        }
+        
+        .overview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .overview-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .overview-card h3 {
+            color: #1e3c72;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .overview-card p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Dataset Controls */
+        .dataset-controls {
+            padding: 30px 0;
+            background: white;
+            border-bottom: 1px solid #eef1ff;
+        }
+        
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid #e1e5f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2a5298;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e1e5f1;
+            border-radius: 8px;
+            color: #1e3c72;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-btn:hover {
+            border-color: #FFD700;
+            background: #fffef5;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            border-color: #FFD700;
+        }
+        
+        .export-btn {
+            padding: 10px 24px;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+        
+        /* Dataset Table Container */
+        .dataset-container {
+            padding: 40px 0 80px;
+        }
+        
+        .table-responsive {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+        
+        .dataset-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+        
+        .dataset-table thead {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+        
+        .dataset-table th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dataset-table th:last-child {
+            border-right: none;
+        }
+        
+        .dataset-table th i {
+            margin-left: 5px;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        
+        .dataset-table tbody tr {
+            border-bottom: 1px solid #eef1ff;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dataset-table tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        .dataset-table tbody tr:nth-child(even) {
+            background-color: #fafbff;
+        }
+        
+        .dataset-table tbody tr:nth-child(even):hover {
+            background-color: #f0f4ff;
+        }
+        
+        .dataset-table td {
+            padding: 15px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .dataset-table .highlight {
+            background-color: #fff8e1;
+            font-weight: 500;
+        }
+        
+        .dataset-table .positive {
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        .dataset-table .negative {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .dataset-table .neutral {
+            color: #666;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        
+        .pagination-btn {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #e1e5f1;
+            border-radius: 8px;
+            color: #1e3c72;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn:hover {
+            border-color: #FFD700;
+            background: #fffef5;
+        }
+        
+        .pagination-btn.active {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            border-color: #FFD700;
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-info {
+            color: #666;
+            margin: 0 15px;
+        }
+        
+        /* Dataset Insights */
+        .dataset-insights {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #1e3c72;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: #FFD700;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .insight-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .insight-card h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .insight-card h3 i {
+            color: #FFD700;
+        }
+        
+        .insight-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .insight-chart {
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a5298;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #FFD700;
+        }
+        
+        .footer-section p, .footer-section li {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul {
+            list-style-type: none;
+        }
+        
+        .footer-section li {
+            padding: 5px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .dataset-hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 40px 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                align-items: flex-start;
+                padding-left: 40px;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .user-profile {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            
+            .controls-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dataset-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .dataset-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dataset-hero {
+                padding: 50px 0 30px;
+            }
+            
+            .dataset-overview, .dataset-controls, .dataset-container, .dataset-insights {
+                padding: 30px 0;
+            }
+            
+            .overview-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">Health<span>Tech</span></div>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'home' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cancer' %}" class="nav-link active">Cancer Dataset</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cancer_model' %}" class="nav-link">Model Train</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'cancer_predict' %}" class="nav-link">Prediction</a>
+                </li>
+                <li class="nav-item">
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Dataset Hero Section -->
+    <section class="dataset-hero">
+        <div class="hero-shapes">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+        </div>
+        
+        <div class="container">
+            <div class="dataset-hero-content">
+                <h1>Breast Cancer <span class="accent">Research Dataset</span></h1>
+                <p>Comprehensive dataset containing patient records, diagnostic metrics, and AI-generated predictions for breast cancer research.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Dataset Table -->
+    <section class="dataset-container">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="dataset-table" id="datasetTable">
+                    <thead>
+                        <tr>
+                            <th>ID <i class="fas fa-sort"></i></th>
+                            <th>Radius Mean <i class="fas fa-sort"></i></th>
+                            <th>Perimeter Mean <i class="fas fa-sort"></i></th>
+                            <th>Area Mean <i class="fas fa-sort"></i></th>
+                            <th>Compactness Mean <i class="fas fa-sort"></i></th>
+                            <th>Concavity Mean<i class="fas fa-sort"></i></th>
+                            <th>Concave Point Mean <i class="fas fa-sort"></i></th>
+                            <th>Radius_se <i class="fas fa-sort"></i></th>
+                            <th>Perimeter_se <i class="fas fa-sort"></i></th>
+                            <th>Area_se <i class="fas fa-sort"></i></th>
+                            <th>Radius_worst <i class="fas fa-sort"></i></th>
+                            <th>Area_worst <i class="fas fa-sort"></i></th>
+                            <th>Compactness_worst <i class="fas fa-sort"></i></th>
+                            <th>Concavity_worst <i class="fas fa-sort"></i></th>
+                            <th>Concave points_worst <i class="fas fa-sort"></i></th>
+                            <th>Classification <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="datasetBody">
+                        <!-- Data will be populated from Django context -->
+                        {{ col|safe }}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </section>
+    
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            
+            <div class="copyright">
+                <p>&copy; 2023 Healthcare Technology Research Institute. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">Dataset last updated: November 15, 2023</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                // Update active link
+                navLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to log out?')) {
+                logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging Out...';
+                logoutBtn.disabled = true;
+                
+                setTimeout(function() {
+                    window.location.href = "{% url 'login' %}";
+                }, 1000);
+            }
+        });
+
+        // Dataset filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const datasetRows = document.querySelectorAll('#datasetBody tr');
+        const searchInput = document.getElementById('searchInput');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                filterDataset(filter);
+            });
+        });
+        
+        function filterDataset(filter) {
+            datasetRows.forEach(row => {
+                const classification = row.querySelector('td:last-child').textContent.toLowerCase();
+                const rowText = row.textContent.toLowerCase();
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                let showRow = true;
+                
+                // Apply search filter
+                if (searchTerm && !rowText.includes(searchTerm)) {
+                    showRow = false;
+                }
+                
+                // Apply classification filter
+                if (filter === 'positive' && !classification.includes('positive')) {
+                    showRow = false;
+                } else if (filter === 'negative' && !classification.includes('negative')) {
+                    showRow = false;
+                }
+                
+                row.style.display = showRow ? '' : 'none';
+            });
+            
+            updatePagination();
+        }
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            filterDataset(activeFilter);
+        });
+        
+        // Table sorting
+        const tableHeaders = document.querySelectorAll('.dataset-table th');
+        tableHeaders.forEach((header, index) => {
+            header.addEventListener('click', function() {
+                sortTable(index);
+            });
+        });
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById('datasetTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Determine sort direction
+            const currentDirection = table.dataset.sortDirection === 'asc' ? 'desc' : 'asc';
+            table.dataset.sortDirection = currentDirection;
+            table.dataset.sortColumn = columnIndex;
+            
+            rows.sort((a, b) => {
+                const aValue = a.children[columnIndex].textContent;
+                const bValue = b.children[columnIndex].textContent;
+                
+                // Try to parse as number
+                const aNum = parseFloat(aValue);
+                const bNum = parseFloat(bValue);
+                
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return currentDirection === 'asc' ? aNum - bNum : bNum - aNum;
+                } else {
+                    // Sort as string
+                    return currentDirection === 'asc' 
+                        ? aValue.localeCompare(bValue)
+                        : bValue.localeCompare(aValue);
+                }
+            });
+            
+            // Reorder rows
+            rows.forEach(row => tbody.appendChild(row));
+            
+            // Update sort indicators
+            updateSortIndicators(columnIndex, currentDirection);
+        }
+        
+        function updateSortIndicators(columnIndex, direction) {
+            tableHeaders.forEach((header, index) => {
+                const icon = header.querySelector('i');
+                if (index === columnIndex) {
+                    icon.className = direction === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+                } else {
+                    icon.className = 'fas fa-sort';
+                }
+            });
+        }
+        
+        // Pagination
+        const rowsPerPage = 20;
+        let currentPage = 1;
+        
+        function updatePagination() {
+            const visibleRows = Array.from(datasetRows).filter(row => row.style.display !== 'none');
+            const totalPages = Math.ceil(visibleRows.length / rowsPerPage);
+            
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('currentPage').textContent = currentPage;
+            
+            // Show/hide rows based on current page
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            
+            let visibleCount = 0;
+            datasetRows.forEach((row, index) => {
+                if (row.style.display !== 'none') {
+                    if (visibleCount >= startIndex && visibleCount < endIndex) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                    visibleCount++;
+                }
+            });
+            
+            // Update pagination buttons
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+            
+            // Update overview count
+            document.querySelector('.overview-card:first-child h3').textContent = visibleRows.length;
+        }
+        
+        document.getElementById('prevPage').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        });
+        
+        document.getElementById('nextPage').addEventListener('click', function() {
+            const visibleRows = Array.from(datasetRows).filter(row => row.style.display !== 'none');
+            const totalPages = Math.ceil(visibleRows.length / rowsPerPage);
+            
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePagination();
+            }
+        });
+        
+        // Export functionality
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Exporting...';
+            btn.disabled = true;
+            
+            // Simulate export process
+            setTimeout(() => {
+                showNotification('Dataset exported successfully as cancer_data.csv', 'success');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1500);
+        });
+        
+        // Initialize pagination
+        updatePagination();
+        
+        // Style classification cells
+        function styleClassificationCells() {
+            const classificationCells = document.querySelectorAll('#datasetBody td:last-child');
+            classificationCells.forEach(cell => {
+                const text = cell.textContent.toLowerCase();
+                if (text.includes('positive')) {
+                    cell.className = 'positive';
+                } else if (text.includes('negative')) {
+                    cell.className = 'negative';
+                } else {
+                    cell.className = 'neutral';
+                }
+            });
+        }
+        
+        // Style numeric cells
+        function styleNumericCells() {
+            const numericCells = document.querySelectorAll('#datasetBody td:not(:first-child):not(:last-child)');
+            numericCells.forEach(cell => {
+                const value = parseFloat(cell.textContent);
+                if (!isNaN(value)) {
+                    // Add formatting for numeric cells
+                    cell.textContent = value.toFixed(2);
+                    
+                    // Highlight extreme values
+                    if (value > 100) {
+                        cell.classList.add('highlight');
+                    }
+                }
+            });
+        }
+        
+        // Apply styling after table is loaded
+        setTimeout(() => {
+            styleClassificationCells();
+            styleNumericCells();
+        }, 100);
+        
+        // Notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button class="notification-close"><i class="fas fa-times"></i></button>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? '#2ecc71' : type === 'error' ? '#e74c3c' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 9999;
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', function() {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            });
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            document.body.appendChild(notification);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - AI Wearable Sensing Technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafc;
+            overflow-x: hidden;
+            padding-top: 80px; /* For fixed navbar */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(30, 60, 114, 0.1);
+            z-index: 1000;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 25px rgba(30, 60, 114, 0.15);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #1e3c72;
+        }
+        
+        .logo-text span {
+            color: #FFD700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #FFD700;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: #FFD700;
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            color: #1e3c72;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #1e3c72;
+        }
+        
+        /* Registration Hero */
+        .registration-hero {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9)),
+                        url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .registration-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .registration-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .accent {
+            color: #FFD700;
+        }
+        
+        .hero-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 5%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Registration Section - Centered Form */
+        .registration-section {
+            flex: 1;
+            padding: 60px 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .registration-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Registration Form */
+        .registration-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+        
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-header h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: #666;
+        }
+        
+        .registration-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1e3c72;
+        }
+        
+        .form-group .required {
+            color: #e74c3c;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2a5298;
+            font-size: 1.1rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #fdfdfe;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+            background-color: white;
+        }
+        
+        .form-control.error {
+            border-color: #e74c3c;
+        }
+        
+        .form-control.success {
+            border-color: #2ecc71;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #2a5298;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .password-strength {
+            margin-top: 8px;
+            height: 5px;
+            border-radius: 3px;
+            background-color: #e1e5f1;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .strength-weak {
+            background-color: #e74c3c;
+            width: 33%;
+        }
+        
+        .strength-medium {
+            background-color: #f39c12;
+            width: 66%;
+        }
+        
+        .strength-strong {
+            background-color: #2ecc71;
+            width: 100%;
+        }
+        
+        .password-hints {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 12px;
+            margin-top: 4px;
+        }
+        
+        .checkbox-group label {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .checkbox-group a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #FFD700, #FFC107);
+            color: #1e3c72;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #cccccc;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+        
+        .login-link a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #FFD700;
+        }
+        
+        .footer-section p, .footer-section li {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul {
+            list-style-type: none;
+        }
+        
+        .footer-section li {
+            padding: 5px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .registration-hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 40px 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                align-items: flex-start;
+                padding-left: 40px;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .registration-form-container {
+                padding: 35px 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .registration-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .registration-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .registration-form-container {
+                padding: 30px 25px;
+            }
+            
+            .form-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .registration-hero {
+                padding: 50px 0 30px;
+            }
+            
+            .registration-section {
+                padding: 40px 0 60px;
+            }
+            
+            .registration-form-container {
+                padding: 25px 20px;
+            }
+            
+            .form-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'index' %}" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">Health<span>Tech</span></div>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'about' %}" class="nav-link ">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'register' %}" class="nav-link active">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link nav-cta">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Registration Hero -->
+    <section class="registration-hero">
+        <div class="hero-shapes">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+        </div>
+        
+        <div class="container">
+            <div class="registration-hero-content">
+                <h1>Join Our <span class="accent">Research Community</span></h1>
+                <p>Register to access exclusive research materials, participate in studies, and stay updated on the latest advancements.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Registration Section -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="registration-container">
+                <!-- Registration Form -->
+                <div class="registration-form-container">
+                    <div class="form-header">
+                        <h2>Create Your Account</h2>
+                        <p>Fill in your details to register for our research community.</p>
+                    </div>
+                    
+                    <form class="registration-form" id="registrationForm" method="post" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username <span class="required">*</span></label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="username" class="form-control" placeholder="Choose a username" name="name" required>
+                            </div>
+                            <div class="error-message" id="username-error">Username must be at least 4 characters long</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" class="form-control" placeholder="your.email@example.com" name="email" required>
+                            </div>
+                            <div class="error-message" id="email-error">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="password">Password <span class="required">*</span></label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="password" class="form-control" placeholder="Create a password" name="password" required>
+                                    <button type="button" class="show-password" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="password-strength-bar" id="password-strength-bar"></div>
+                                </div>
+                                <div class="password-hints" id="password-hints">
+                                    Use at least 8 characters with a mix of letters, numbers, and symbols
+                                </div>
+                                <div class="error-message" id="password-error">Password must be at least 8 characters long</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" name="confirmpassword" required>
+                                    <button type="button" class="show-password" id="toggleConfirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="confirmPassword-error">Passwords do not match</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact">Contact Number <span class="required">*</span></label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="contact" class="form-control" placeholder="Your phone number" name="contact" required>
+                            </div>
+                            <div class="error-message" id="contact-error">Please enter a valid phone number</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address <span class="required">*</span></label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-home"></i>
+                                <textarea id="address" class="form-control" placeholder="Your full address" rows="3" name="address" required></textarea>
+                            </div>
+                            <div class="error-message" id="address-error">Please enter your address</div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <!-- <input type="checkbox" id="terms" required>
+                            <label for="terms">
+                                I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>. I consent to receiving research updates and communications.
+                            </label> -->
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">Create Account</button>
+                        
+                        <div class="login-link">
+                            Already have an account? <a href="{% url 'login' %}">Sign In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert('{{ message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Our Research</h4>
+                    <p>Pioneering AI-based wearable sensing technologies for diabetes and breast cancer management through interdisciplinary collaboration and innovative research.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Home</a></li>
+                        <li><a href="{% url 'about' %}" style="color: white; text-decoration: none;">About Us</a></li>
+                        <li><a href="{% url 'register' %}" style="color: white; text-decoration: none;">Register</a></li>
+                        <li><a href="{% url 'login' %}" style="color: white; text-decoration: none;">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p><i class="fas fa-envelope"></i> research@healthtech.edu</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Healthcare Technology Research Institute</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Healthcare Technology Research Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                // Update active link
+                navLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form validation and interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const contact = document.getElementById('contact');
+            const address = document.getElementById('address');
+            const terms = document.getElementById('terms');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            const usernameError = document.getElementById('username-error');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirmPassword-error');
+            const contactError = document.getElementById('contact-error');
+            const addressError = document.getElementById('address-error');
+            
+            const passwordStrengthBar = document.getElementById('password-strength-bar');
+            const passwordHints = document.getElementById('password-hints');
+            
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Password strength checker
+            password.addEventListener('input', function() {
+                const value = password.value;
+                let strength = 0;
+                
+                // Check password length
+                if (value.length >= 8) strength++;
+                
+                // Check for uppercase letters
+                if (/[A-Z]/.test(value)) strength++;
+                
+                // Check for numbers
+                if (/[0-9]/.test(value)) strength++;
+                
+                // Check for special characters
+                if (/[^A-Za-z0-9]/.test(value)) strength++;
+                
+                // Update strength bar
+                passwordStrengthBar.className = 'password-strength-bar';
+                
+                if (value.length === 0) {
+                    passwordHints.textContent = 'Use at least 8 characters with a mix of letters, numbers, and symbols';
+                    passwordHints.style.color = '#666';
+                } else if (strength <= 1) {
+                    passwordStrengthBar.classList.add('strength-weak');
+                    passwordHints.textContent = 'Weak password - try adding uppercase letters, numbers, or symbols';
+                    passwordHints.style.color = '#e74c3c';
+                } else if (strength <= 3) {
+                    passwordStrengthBar.classList.add('strength-medium');
+                    passwordHints.textContent = 'Medium strength password - could be stronger';
+                    passwordHints.style.color = '#f39c12';
+                } else {
+                    passwordStrengthBar.classList.add('strength-strong');
+                    passwordHints.textContent = 'Strong password!';
+                    passwordHints.style.color = '#2ecc71';
+                }
+                
+                validatePassword();
+                validateConfirmPassword();
+            });
+            
+            // Real-time validation functions
+            function validateUsername() {
+                const value = username.value.trim();
+                if (value.length < 4) {
+                    username.classList.add('error');
+                    username.classList.remove('success');
+                    usernameError.style.display = 'block';
+                    return false;
+                } else {
+                    username.classList.remove('error');
+                    username.classList.add('success');
+                    usernameError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateEmail() {
+                const value = email.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailRegex.test(value)) {
+                    email.classList.add('error');
+                    email.classList.remove('success');
+                    emailError.style.display = 'block';
+                    return false;
+                } else {
+                    email.classList.remove('error');
+                    email.classList.add('success');
+                    emailError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validatePassword() {
+                const value = password.value;
+                
+                if (value.length < 8) {
+                    password.classList.add('error');
+                    password.classList.remove('success');
+                    passwordError.style.display = 'block';
+                    return false;
+                } else {
+                    password.classList.remove('error');
+                    password.classList.add('success');
+                    passwordError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateConfirmPassword() {
+                const value = confirmPassword.value;
+                
+                if (value !== password.value || value.length === 0) {
+                    confirmPassword.classList.add('error');
+                    confirmPassword.classList.remove('success');
+                    confirmPasswordError.style.display = 'block';
+                    return false;
+                } else {
+                    confirmPassword.classList.remove('error');
+                    confirmPassword.classList.add('success');
+                    confirmPasswordError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateContact() {
+                const value = contact.value.trim();
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                
+                if (!phoneRegex.test(value.replace(/[\s\(\)\-]/g, ''))) {
+                    contact.classList.add('error');
+                    contact.classList.remove('success');
+                    contactError.style.display = 'block';
+                    return false;
+                } else {
+                    contact.classList.remove('error');
+                    contact.classList.add('success');
+                    contactError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateAddress() {
+                const value = address.value.trim();
+                
+                if (value.length < 10) {
+                    address.classList.add('error');
+                    address.classList.remove('success');
+                    addressError.style.display = 'block';
+                    return false;
+                } else {
+                    address.classList.remove('error');
+                    address.classList.add('success');
+                    addressError.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            function validateTerms() {
+                if (!terms.checked) {
+                    terms.parentElement.style.color = '#e74c3c';
+                    return false;
+                } else {
+                    terms.parentElement.style.color = '#555';
+                    return true;
+                }
+            }
+            
+            function validateForm() {
+                const isUsernameValid = validateUsername();
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                const isConfirmPasswordValid = validateConfirmPassword();
+                const isContactValid = validateContact();
+                const isAddressValid = validateAddress();
+                const isTermsValid = validateTerms();
+                
+                const isValid = isUsernameValid && isEmailValid && isPasswordValid && 
+                               isConfirmPasswordValid && isContactValid && isAddressValid && isTermsValid;
+                
+                submitBtn.disabled = !isValid;
+                
+                return isValid;
+            }
+            
+            // Add event listeners for real-time validation
+            username.addEventListener('input', validateUsername);
+            email.addEventListener('input', validateEmail);
+            password.addEventListener('input', validatePassword);
+            confirmPassword.addEventListener('input', validateConfirmPassword);
+            contact.addEventListener('input', validateContact);
+            address.addEventListener('input', validateAddress);
+            terms.addEventListener('change', validateTerms);
+            
+            // Initial validation
+            validateForm();
+            
+            // Form submission
+            // form.addEventListener('submit', function(e) {
+            //     e.preventDefault();
+                
+            //     if (validateForm()) {
+            //         // Show loading state
+            //         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            //         submitBtn.disabled = true;
+                    
+            //         // Simulate API call
+            //         setTimeout(function() {
+            //             // Show success message
+            //             alert('Registration successful! Welcome to our research community.');
+                        
+            //             // Reset form
+            //             form.reset();
+            //             submitBtn.innerHTML = 'Create Account';
+            //             submitBtn.disabled = false;
+                        
+            //             // Remove success classes
+            //             const successFields = document.querySelectorAll('.success');
+            //             successFields.forEach(field => {
+            //                 field.classList.remove('success');
+            //             });
+                        
+            //             // Reset password strength
+            //             passwordStrengthBar.className = 'password-strength-bar';
+            //             passwordHints.textContent = 'Use at least 8 characters with a mix of letters, numbers, and symbols';
+            //             passwordHints.style.color = '#666';
+            //         }, 1500);
+            //     }
+            // });
+        });
+    </script>
+</body>
+</html>
